@@ -1,0 +1,243 @@
+br.pc{
+	display: block;
+}
+br.sp{
+	display: none;
+}
+
+html {
+	--border-color: #333;
+}
+html.dark{
+	--border-color: #fffae4;
+}
+
+header ul li{
+	width: 230px;
+}
+
+/* item mypage */
+
+.item_main section .total_price span{
+	font-size: 24px;
+}
+.item_main section .total_price::after{
+	font-size: 20px;
+}
+.item_main section table .pc{
+	display: table-row;
+}
+.item_main section table .pc p.note{
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+
+}
+.item_main section table .sp{
+	display: none;
+}
+.item_main section table tr td span.notice{
+	display: block;
+	margin: -3px 0 0;
+	white-space: nowrap;
+}
+
+.setting_area{
+	bottom: 5%;
+	right: 10%;
+}
+
+@media screen and (max-width:1400px) {
+	.item_main .link_area,
+	.item_main section{
+		margin: 50px 5% 0;
+	}
+	.setting_area{
+		right: 5%;
+	}	
+}
+@media screen and (max-width:1200px) {
+	.item_main .link_area,
+	.item_main section{
+		margin: 50px 10% 0 5%;
+	}
+	.setting_area{
+		right: 3%;
+	}	
+}
+
+/* item edit */
+
+.item_edit{
+	min-width: 600px;
+}
+#item.item_edit table td{
+	height: 30px;
+}
+.item_edit table input[type="number"]{
+	width: 50%;
+}
+.item_edit table input[type="date"]{
+	width: 50%;
+}
+.item_edit table select.season_select{
+	width: 45%;
+}
+.item_edit table select.todo_select{
+	width: 50%;
+}
+
+/* item list */
+
+.item_list .setting_area{
+	bottom: 5%;
+	right: 5%;
+}
+.item_list table input[type="text"]{
+	width: 90%;
+}
+.item_list table select{
+	width: 60%;
+}
+.item_list .search_area table input[type="number"],
+.item_list .search_area table input[type="date"]{
+	width: 40%;
+}
+#item.item_list .search_area table td{
+	margin: 5px auto;
+}
+@media screen and (max-width:1350px) {
+	#item.item_list .search_area table tr th{
+		width: 12%;
+	}
+	#item.item_list .search_area table tr td{
+		width: 35%;
+	}
+}
+@media screen and (max-width:1100px) {
+	.item_list table input[type="date"]{
+		font-size: 80%;
+	}
+}
+
+/* todo main */
+
+.todo_main section table .pc{
+	display: table-row;
+}
+.todo_main section table .pc p.note{
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+}
+.todo_main section table .sp{
+	display: none;
+}
+.todo_main section table tr td.deadline{
+	width: 10%;
+}
+.todo_main section table tr td span.notice{
+	display: block;
+	margin: -3px 0 0;
+}
+
+/* todo list */
+
+.todo_list section .list_info{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.todo_list section p.list_note {
+	margin-bottom: -35px;
+}
+.todo_list section .list_period span {
+	line-height: 1.4;
+}
+.todo_list section table .pc{
+	display: table-row;
+}
+.todo_list section table tr td.check{
+	width: 4%;
+}
+.todo_list section table tr td.deadline{
+	width: 12%;
+}
+.todo_list section table tr td .startdate input,
+.todo_list section table tr td .enddate input{
+	width: 120px;
+}
+.todo_list section table tr td.change{
+	width: 6%;
+}
+.todo_list section table .pc p.note{
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+}
+.todo_list section table .sp{
+	display: none;
+}
+.todo_list section table tr td span.notice{
+	display: block;
+	margin: -3px 0 0;
+}
+.todo_list .all_check{
+	margin-left: 6%;
+	margin-right: 5px;
+}
+
+/* todo edit */
+
+.todo_edit{
+	min-width: 600px;
+}
+#item.todo_edit table td{
+	height: 30px;
+}
+.todo_edit table input[type="number"]{
+	width: 50%;
+}
+.todo_edit table input[type="date"]{
+	width: 50%;
+}
+.todo_edit table select.list_select{
+	width: 45%;
+}
+.todo_edit table select.todo_select{
+	width: 50%;
+}
+
+/* todo archives */
+
+.todo_archives .daily {
+	width: 40%;
+}
+
+@media screen and (max-width:1400px) {
+	.todo_main .link_area,
+	.todo_list .link_area{
+		margin: 50px 5% 0;
+	}
+	.todo_main section,
+	.todo_list section{
+		margin: -30px 5% 0;
+	}
+}
+@media screen and (max-width:1200px) {
+	.todo_main .link_area,
+	.todo_list .link_area{
+		margin: 50px 10% 0 5%;
+	}
+	.todo_main section,
+	.todo_list section{
+		margin: -30px 10% 0 5%;
+	}
+	.todo_archives .daily {
+		width: 38%;
+	}
+}
+

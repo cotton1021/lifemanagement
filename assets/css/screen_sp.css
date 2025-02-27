@@ -1,0 +1,257 @@
+br.pc{
+	display: none;
+}
+br.sp{
+	display: block;
+}
+
+html {
+	--border-color: #333;
+}
+
+header ul li{
+	width: 33%;
+}
+
+/* item mypage */
+
+#item section table{
+	width: 100%;
+}
+#item section table th{
+	display: none;
+}
+#item section table tbody{
+	width: 100%;
+	display: inline-table;
+	margin: 20px 0;
+}
+#item section table td{
+	display: block;
+}
+#item section table td:before{
+	content: attr(data-label);
+	font-weight: bold;
+	margin-right: 10px;
+}
+#item section table tr td a.detail_button,
+#item section table tr td a.change_button{
+	display: inline-block;
+	margin: 5px;
+}
+.item_main section{
+	width: 80%;
+	margin: 40px 17% auto 3%;
+}
+.item_main section h2{
+	font-size: 1.3rem;
+}
+.item_main section .total_price{
+	margin-right: 5px;
+}
+.item_main section .total_price span{
+	font-size: 20px;
+}
+.item_main section .total_price::after{
+	font-size: 16px;
+}
+.item_main section table .pc{
+	display: none;
+}
+.item_main section table .sp{
+	display: block;
+}
+.item_main section table tr td span.notice{
+	display: inline-block;
+}
+.item_main section table .note.sp{
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+}
+
+.setting_area{
+	bottom: 5%;
+	right: 3%;
+}
+
+/* item edit */
+
+.item_edit{
+	width: 95%;
+	max-width: 600px;
+}
+#item.item_edit table th{
+	display: block;
+}
+.item_edit table td.delete{
+	text-align: center;
+}
+.item_edit table input[type="number"],
+.item_edit table input[type="date"]{
+	width: 55%;
+}
+.item_edit table select.season_select{
+	width: auto;
+}
+
+/* item list */
+
+.item_list .search_area{
+	margin-right: 6%;
+}
+#item.item_list .search_area table th,
+#item.item_list .search_area table td{
+	display: block;
+	width: 100%;
+}
+#item.item_list .search_area table th{
+	padding: 0;
+}
+#item.item_list .search_area table td{
+	margin: 0 auto 10px;
+}
+.item_list table input[type="text"]{
+	width: 100%;
+}
+.item_list table select{
+	width: 100%;
+}
+.item_list .search_area table input[type="number"],
+.item_list .search_area table input[type="date"]{
+	width: 40%;
+}
+
+/* todo main */
+
+#todo section{
+	width: 80%;
+	margin: 0 17% auto 3%;
+}
+#todo section table{
+	width: 100%;
+}
+#todo section table th{
+	display: none;
+}
+#todo section table tbody{
+	width: 100%;
+	display: inline-table;
+	margin: 20px 0;
+}
+#todo section table td{
+	display: block;
+}
+#todo section table td:before{
+	content: attr(data-label);
+	font-weight: bold;
+	margin-right: 10px;
+}
+#todo section table tr td a.detail_button,
+#todo section table tr td a.change_button{
+	display: inline-block;
+	margin: 5px;
+}
+.todo_main section table .pc{
+	display: none;
+}
+.todo_main section table .sp{
+	display: block;
+}
+.todo_main section table tr td span.notice{
+	display: inline-block;
+}
+.todo_main section table .note.sp{
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+}
+
+/* todo list */
+
+.todo_list section .todo_note{
+	text-align: center;
+}
+.todo_list section .list_info{
+	display: block;
+}
+.todo_list section h3 {
+	margin: 1em 0 0.5em;
+}
+.todo_list section .list_period {
+	font-size: 15px;
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 30px;
+}
+.todo_list section .list_period span {
+	width: 30%;
+	line-height: 1.2;
+}
+.todo_list section .change_button{
+	margin: 0 0 0 auto;
+}
+.todo_list section p.note{
+	margin: 10px 5px;
+}
+.todo_list section .todo_subtitle{
+	margin-top: 0;
+}
+.todo_list section .todo_detail table:last-of-type{
+	margin-bottom: 20px;
+}
+.todo_list section table .pc{
+	display: none;
+}
+.todo_list section table .sp{
+	display: block;
+}
+.todo_list section table tr td span.notice{
+	display: inline-block;
+}
+.todo_list section table .note.sp{
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+}
+.todo_list section .shopping .change_button{
+	margin: 5px auto;
+}
+.todo_setting {
+	flex-wrap: wrap;
+	margin-top: 20px;
+}
+
+/* todo edit */
+
+.todo_edit{
+	width: 95%;
+	max-width: 600px;
+}
+#item.todo_edit table th{
+	display: block;
+}
+.todo_edit table td.delete{
+	text-align: center;
+}
+.todo_edit table input[type="number"],
+.todo_edit table input[type="date"]{
+	width: 55%;
+}
+.todo_edit table select.list_select{
+	width: auto;
+}
+
+/* todo archives */
+.todo_archives .daily {
+	width: 100%;
+}
+
+/* todo csv */
+
+#todo.todo_csv section{
+	margin: 0 auto;
+}
