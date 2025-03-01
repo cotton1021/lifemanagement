@@ -384,7 +384,6 @@ $interval = 3;
 		</form>
 	</section>
 	<div class="setting_area">
-		<div><a href="./setting.php" target="_blank"><span class="icon"><img src="../../assets/img/setting.svg" alt="設定"><span class="hover">設定</span></span></a></div>
 		<div><a href="./todo_csv.php"><span class="icon"><img src="../../assets/img/csv.svg" alt="検索"><span class="hover">csv一括登録</span></span></a></div>
 		<div><a href=""><span class="icon"><img src="../../assets/img/search.svg" alt="検索"><span class="hover">検索</span></span></a></div>
 		<div><a href="./todo_list_edit.php" target="_blank"><span class="icon"><img src="../../assets/img/list.svg" alt="新規リスト"><span class="hover">新規リスト</span></span></a></div>
