@@ -11,7 +11,7 @@ $dbh = $db->getConnection();
     
 $sql = "SELECT ISE.*
 				FROM item_separate AS ISE
-				WHERE ISE.item_sd_id = 1";
+				WHERE ISE.item_sd_id = ?";
 $stmt = $dbh -> prepare($sql);
 $data[] = $id;
 $stmt -> execute($data);
