@@ -129,8 +129,8 @@ if (!empty($_POST['todo_id']) && $todo_complete == 1) {
 		$data[] = $todo_complete_date;
 		$data[] = $todo_note;
 		$data[] = $todo_create_date;
+		$stmt->execute($data);
 	}
-	$stmt->execute($data);
 }
 
 $dbh = null;
