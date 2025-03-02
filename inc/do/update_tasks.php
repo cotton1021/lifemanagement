@@ -78,27 +78,27 @@ if ($_POST['action'] === 'update') {
 		$stmt->execute([$id]);
 		$task = $stmt->fetch(PDO::FETCH_ASSOC);
 
-		$todo_start = $_POST['todo_start'][$id] ?? new DateTime();
+		$todo_start = $_POST['todo_start'][$id] ?? $task['todo_start'] ?? null;
 		if (!empty($todo_start) && strtotime($todo_start)) {
 			$todo_start = (new DateTime($todo_start))->format('Y-m-d 00:00:00');
 		} else {
-			$todo_start = null; // 無効な日付の場合は NULL に設定
+			$todo_start = (new DateTime())->format('Y-m-d 00:00:00'); // 今日の日付をセット
 		}
-		$todo_deadline = $_POST['todo_deadline'][$id] ?? new DateTime();
+		$todo_deadline = $_POST['todo_deadline'][$id] ?? $task['todo_deadline'] ?? null;
 		if (!empty($todo_deadline) && strtotime($todo_deadline)) {
 			$todo_deadline = (new DateTime($todo_deadline))->format('Y-m-d 00:00:00');
 		} else {
-			$todo_deadline = null;
+			$todo_deadline = (new DateTime())->format('Y-m-d 00:00:00'); // 今日の日付をセット
 		}
-		$todo_priority_num = $_POST['todo_priority_num'][$id] ?? 1;
+		$todo_priority_num = $_POST['todo_priority_num'][$id] ?? $task['todo_priority_num'] ?? 1;
 
 		if ($task) {
 			//todo_complete を更新
 			$stmt = $dbh->prepare("UPDATE todo_main SET todo_start=?, todo_deadline=?, todo_priority_num=?, todo_complete = 1, todo_complete_date = CURDATE() WHERE todo_id = ?");
 			$stmt->execute([$todo_start, $todo_deadline, $todo_priority_num, $id]);
 	
-			//todo_list_roop が 1 なら新規登録する
-			if ($task['todo_list_roop'] == 1) {
+			//todo_list_roop または todo_loop が 1 なら新規登録する
+			if ($task['todo_list_roop'] == 1 || $task['todo_loop'] == 1) {
 				
 				$todo_list = $task['todo_list'];
 
