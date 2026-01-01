@@ -5,6 +5,7 @@ $db = new DBConnect();
 $dbh = $db->getConnection();
 
 $item_select = $_POST['item_select'];
+$action = $_POST['action'];
 
 if($_POST['action'] === 'postpone'){
 	foreach($item_select as $id){
@@ -20,6 +21,9 @@ if($_POST['action'] === 'postpone'){
 		$stmt = $dbh -> prepare("UPDATE item_main SET item_payment_date=?, item_buy_date=?, item_update_date=CURDATE() WHERE item_id=?");
 		$stmt -> execute([$item_payment_date,$item_buy_date,$id]);
 	}
+	$dbh = null;
+	header('Location: ' . $_SERVER['HTTP_REFERER']);
+	exit;
 }elseif($_POST['action'] === 'complete'){
 	foreach($item_select as $id){
 		$item_pay_confirm = 1;
@@ -36,19 +40,29 @@ if($_POST['action'] === 'postpone'){
     WHERE item_id = ?");
 		$stmt->execute([$id]);
 	}
+	$dbh = null;
+	header('Location: ' . $_SERVER['HTTP_REFERER']);
+	exit;
 }elseif($_POST['action'] === 'delete'){
 	foreach($item_select as $id){
 		$stmt = $dbh -> prepare("UPDATE item_main SET item_delete_date=CURDATE(), item_delete_flag=1 WHERE item_id=?");
 		$stmt -> execute([$id]);
 	}
-}
+	$dbh = null;
+	header('Location: ' . $_SERVER['HTTP_REFERER']);
+	exit;
+}elseif($_POST['action'] === 'copy'){
+	$params = [];
+	foreach ($item_select as $id) {
+		$params[] = 'copy_ids[]=' . urlencode((int)$id);
+	}
+	$query = implode('&', $params);
 
-$dbh = null;
-/*
-$item_url = ITEM_URL;
-$redirect_url = $item_url."mypage.php";
-header('Location: ' . $redirect_url);
-*/
-header('Location: ' . $_SERVER['HTTP_REFERER']);
-exit;
+	$url = "../../views/item/item_edit.php?" . $query;
+	header('Location: ' . $url);
+	exit;
+}else{
+	header('Location: ' . $_SERVER['HTTP_REFERER']);
+	exit;
+}
 ?>

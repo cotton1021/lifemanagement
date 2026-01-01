@@ -33,7 +33,7 @@
 	if($year == ""){
 		$year = date('Y',strtotime("-$date_set day"));
 		$next_year = date('Y',strtotime("$next_month_end +1 day"));
-		$prev_year = date('Y',strtotime("$month_start -1 year"));
+		$prev_year = date('Y',strtotime("$month_end -1 year"));
 	}else{
 		$next_year = $year + 1;
 		$prev_year = $year - 1;
@@ -48,13 +48,10 @@
 	}
 
 	/* アーカイブ */
-	$archive_month_start = date($year.'-m-d',strtotime(date('Y-m-01')."+$date_set day -1 day"));
-	if($year == $this_year){
-		$archive_month_end = date('Y-m-d',strtotime(date('Y-m-t',strtotime($month_end))."+$date_set day -1 day"));
-	}else{
-		$archive_month_end = date($year.'-m-d',strtotime(date('Y-m-t',strtotime($month_end))."+$date_set day -1 day"));
-	}
-    
+	$archive_month_start = date($year.'-m-d',strtotime(date('Y-01-01')."+$date_set day -1 day"));
+	$archive_month_end = date('Y-m-d',strtotime(date('Y-01-t',strtotime($archive_month_start))."+$date_set day -1 day"));
+
+
 	$sql = "SELECT IM.*,
 					CC.com_cat,
 					CG.com_genre,
@@ -99,12 +96,12 @@
 		$date_setting_end = $month_end." 23:59:59";
 		$disp_num = 2;
 		$disp_title = "<h2>【当月】".date('n/j',strtotime($month_start))."～".date('n/j',strtotime($month_end))."の購入品</h2>";
-	}elseif($_GET['year'] < $this_year){
+	}elseif($_GET['year'] <= $this_year){
 		$date_setting_start = $archive_month_start." 00:00:00";
 		$date_setting_end = $archive_month_end." 23:59:59";
-		$disp_num = 11;
+		$disp_num = 12;
 		$disp_title = "<h2>".date('Y/n/j',strtotime($archive_month_start))."～".date('Y/n/j',strtotime($archive_month_end))."の購入品</h2>";
-	}elseif($_GET['year'] >= $this_year){
+	}elseif($_GET['year'] > $this_year){
 		$date_setting_start = $future_month_start." 00:00:00";
 		$date_setting_end = $future_month_end." 23:59:59";
 		$disp_num = 12;
@@ -164,7 +161,10 @@
 ?>
 				<tbody>
 					<tr>
-						<td rowspan="2" class="check"><input type="checkbox" name="item_select[]" value="<?php echo $rec['item_id']?>"></td>
+						<td rowspan="2" class="check">
+							<input type="checkbox" name="item_select[]" value="<?php echo $rec['item_id']?>">
+							<input type="hidden" name="action" id="actionField" value="">
+						</td>
 						<td data-label="タイトル：" class="title">
 <?php
 				if(!empty($rec['item_url'])){
@@ -218,13 +218,16 @@
 			$date_setting_start = $next_month_start." 00:00:00";
 			$date_setting_end = $next_month_end." 23:59:59";
 			$disp_title = "<h2>【翌月】".date('n/j',strtotime($next_month_start))."～".date('n/j',strtotime($next_month_end))."の購入品</h2>";
-		}elseif($_GET['year'] < $this_year){
+		}elseif($_GET['year'] <= $this_year){
 			$archive_month_start = date('Y-m-d',strtotime($archive_month_end."+1 day"));
 			$archive_month_end = date('Y-m-d',strtotime(date('Y-m-t',strtotime($archive_month_end))."+$date_set day -1 day"));
+			if (strtotime($archive_month_start) >= strtotime($month_start)) {
+				break;
+			}
 			$date_setting_start = $archive_month_start." 00:00:00";
 			$date_setting_end = $archive_month_end." 23:59:59";
 			$disp_title = "<h2>".date('Y/n/j',strtotime($archive_month_start))."～".date('Y/n/j',strtotime($archive_month_end))."の購入品</h2>";
-		}elseif($_GET['year'] >= $this_year){
+		}elseif($_GET['year'] > $this_year){
 			$future_month_start = date('Y-m-d',strtotime($future_month_end."+1 day"));
 			$future_month_end = date('Y-m-d',strtotime(date('Y-m-t',strtotime($future_month_end))."+$date_set day -1 day"));	
 			$date_setting_start = $future_month_start." 00:00:00";
@@ -246,10 +249,10 @@
 		<div class="setting_area">
 			<div><a href="./setting.php" target="_blank"><span class="icon"><img src="../../assets/img/setting.svg" alt="設定"><span class="hover">設定</span></span></a></div>
 			<div><a href="./item_search.php"><span class="icon"><img src="../../assets/img/search.svg" alt="検索"><span class="hover">検索</span></span></a></div>
-			<div><input type="submit" name="action" class="icon delete edit_icon" value="delete" disabled><span class="hover">削除</span></div>
-			<div><input type="submit" name="action" class="icon postpone edit_icon" value="postpone" disabled><span class="hover">翌月へ延期</span></div>
-			<div><input type="submit" name="action" class="icon complete edit_icon" value="complete" disabled><span class="hover">決済済</span></div>
-			<div><input type="submit" name="action" class="icon copy edit_icon only" value="copy" disabled><span class="hover">コピーして新規追加（開発中）</span></div>
+			<div><input type="submit" name="action" class="icon delete edit_icon" value="delete"><span class="hover">削除</span></div>
+			<div><input type="submit" name="action" class="icon postpone edit_icon" value="postpone"><span class="hover">翌月へ延期</span></div>
+			<div><input type="submit" name="action" class="icon complete edit_icon" value="complete"><span class="hover">決済済</span></div>
+			<div><input type="submit" name="action" class="icon copy edit_icon" id="copy_button" value="copy"><span class="hover">コピーして新規登録</span></div>
 			<div><a href="./item_edit.php" target="_blank"><span class="icon new_item"><span></span></span><span class="hover">新規追加</span></a></div>
 		</div>
 	</form>
@@ -259,15 +262,28 @@
 		$(this).toggleClass('open');
 		$(this).next().fadeToggle();
 	});
-	$(document).on('click',function() {
-		var check_count = $('table :checked').length;
+	$(document).on('change', 'input[name="item_select[]"]', function () {
+		const check_count = $('input[name="item_select[]"]:checked').length;
 		if(check_count == 0){
 			$('.edit_icon').prop('disabled',true);
-		}else if(check_count > 1){
-			$('.only').prop('disabled',true);
 		}else{
 			$('.edit_icon').prop('disabled',false);
 		};
+	});
+
+	function updateEditIconState() {
+		const check_count = $('input[name="item_select[]"]:checked').length;
+		$('.edit_icon').prop('disabled', check_count === 0);
+	}
+
+	// 初期表示時に一度実行
+	$(function () {
+		updateEditIconState();
+	});
+
+	// チェック状態が変わったら実行
+	$(document).on('change', 'input[name="item_select[]"]', function () {
+		updateEditIconState();
 	});
 </script>
 </html>

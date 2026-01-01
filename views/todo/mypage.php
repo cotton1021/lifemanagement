@@ -162,7 +162,7 @@ $interval = 3;
 						<div><input type="submit" name="action" class="icon delete edit_icon" value="delete" disabled><span class="hover">削除</span></div>
 						<div><input type="submit" name="action" class="icon postpone edit_icon" value="postpone" disabled><span class="hover">翌日へ延期</span></div>
 						<div><input type="submit" name="action" class="icon complete edit_icon" value="complete" disabled><span class="hover">完了</span></div>
-						<div><a href="./item_edit.php" target="_blank"><span class="icon new_item"><span></span></span></a><span class="hover">新規ToDo</span></div>
+						<div><a href="./todo_list_edit.php" target="_blank"><span class="icon new_item"><span></span></span></a><span class="hover">新規ToDo</span></div>
 					</div>
 				</div>
 			<?php

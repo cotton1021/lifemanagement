@@ -46,6 +46,61 @@ $selected_date = $rec['item_separate_date'];
 						</select>
 					</td>
 				</tr>
+				<tr>
+					<th>集計期間（金額）</th>
+					<td>
+						<select name="" id="">
+							<option value=""></option>
+						</select>
+					</td>
+				</tr>
+			</table>
+			<hr>
+			<table>
+				<tr>
+					<th>現金</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>
+						<input type="text" value="epos">
+					</th>
+					<td>
+						<select name="" id="">
+							<option value=""></option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<input type="text" value="jcb">
+					</th>
+					<td>
+						<select name="" id="">
+							<option value=""></option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<input type="text" value="hama">
+					</th>
+					<td>
+						<select name="" id="">
+							<option value=""></option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<input type="text" value="その他">
+					</th>
+					<td>
+						<select name="" id="">
+							<option value=""></option>
+						</select>
+					</td>
+				</tr>
 			</table>
 			<div class="button_area">
 				<input type="submit" id="update" value="更新">

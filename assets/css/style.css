@@ -143,6 +143,10 @@ header ul li.room_link:hover a {
 	border: 0.1em solid #4b4b4b;
 }
 
+.setting_area button.icon {
+	padding: 0;
+}
+
 .setting_area input.delete {
 	background-image: url(../img/delete.svg);
 }
@@ -155,15 +159,16 @@ header ul li.room_link:hover a {
 	background-image: url(../img/complete.svg);
 }
 
-.setting_area input.copy {
-	background-image: url(../img/copy.svg);
-}
-
 .setting_area input.update {
 	background-image: url(../img/update.svg);
 }
 
-.setting_area input[type="submit"]:disabled {
+.setting_area input.copy {
+	background-image: url(../img/copy.svg);
+}
+
+.setting_area input[type="submit"]:disabled,
+.setting_area button:disabled {
 	opacity: 0.5;
 }
 
@@ -456,6 +461,10 @@ header ul li.room_link:hover a {
 
 .item_edit table label {
 	margin: 0 20px 0 3px;
+}
+
+.item_edit hr {
+	margin: 30px 0;
 }
 
 .item_edit .button_area {

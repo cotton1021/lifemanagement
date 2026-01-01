@@ -139,7 +139,7 @@
 <?php
 	if (!empty($_POST)) {
 ?>				
-		<form action="">
+		<form method="post" action="../../inc/do/update_items.php">
 			<table>
 				<thead>
 					<tr>
@@ -276,21 +276,37 @@
 		<div class="setting_area">
 			<div><a href="./setting.php" target="_blank"><span class="icon"><img src="../../assets/img/setting.svg" alt="設定"><span class="hover">設定</span></span></a></div>
 			<div><a href="./mypage.php"><span class="icon"><img src="../../assets/img/main.svg" alt="マイページ"><span class="hover">マイページへ</span></span></a></div>
-			<div><input type="submit" name="action" class="icon delete edit_icon" value="delete" disabled><span class="hover">削除</span></div>
-			<div><input type="submit" name="action" class="icon postpone edit_icon" value="postpone" disabled><span class="hover">翌月へ延期</span></div>
-			<div><input type="submit" name="action" class="icon complete edit_icon" value="complete" disabled><span class="hover">決済済</span></div>
+			<div><input type="submit" name="action" class="icon delete edit_icon" value="delete"><span class="hover">削除</span></div>
+			<div><input type="submit" name="action" class="icon postpone edit_icon" value="postpone"><span class="hover">翌月へ延期</span></div>
+			<div><input type="submit" name="action" class="icon complete edit_icon" value="complete"><span class="hover">決済済</span></div>
+			<div><input type="submit" name="action" class="icon copy edit_icon" id="copy_button" value="copy"><span class="hover">コピーして新規登録</span></div>
 			<div><a href="./item_edit.php" target="_blank"><span class="icon new_item"><span></span></span><span class="hover">新規追加</span></a></div>
 		</div>
 	</form>
 </body>
 <script>
-	$(document).on('click',function() {
-		var check_count = $('table.item_result :checked').length;
+	$(document).on('change', 'input[name="item_select[]"]', function () {
+		const check_count = $('input[name="item_select[]"]:checked').length;
 		if(check_count == 0){
 			$('.edit_icon').prop('disabled',true);
 		}else{
 			$('.edit_icon').prop('disabled',false);
 		};
+	});
+
+	function updateEditIconState() {
+		const check_count = $('input[name="item_select[]"]:checked').length;
+		$('.edit_icon').prop('disabled', check_count === 0);
+	}
+
+	// 初期表示時に一度実行
+	$(function () {
+		updateEditIconState();
+	});
+
+	// チェック状態が変わったら実行
+	$(document).on('change', 'input[name="item_select[]"]', function () {
+		updateEditIconState();
 	});
 </script>
 </html>
