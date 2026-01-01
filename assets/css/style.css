@@ -440,6 +440,10 @@ header ul li.room_link:hover a {
 	display: none;
 }
 
+#item.item_edit table .icon img {
+	width: 12px;
+}
+
 .item_edit table input[type="number"],
 .item_edit table input[type="date"] {
 	line-height: 2;
