@@ -28,7 +28,7 @@
 
 	/* 翌月 */
 	$next_month_start = date('Y-m-d',strtotime($month_end."+1 day"));
-	$next_month_end = date('Y-m-d',strtotime(date('Y-m-t',strtotime($month_end))."+$date_set day -1 day"));
+	$next_month_end = date('Y-m-d',strtotime(date('Y-m-t',strtotime($next_month_start))."+$date_set day -1 day"));
 
 	if($year == ""){
 		$year = date('Y',strtotime("-$date_set day"));
@@ -41,7 +41,7 @@
 
 	/* 翌々月 */
 	$future_month_start = date($year.'-m-d',strtotime($next_month_end."+1 day"));
-	$future_month_end = date($year.'-m-d',strtotime(date('Y-m-t',strtotime($next_month_end))."+$date_set day -1 day"));
+	$future_month_end = date('Y-m-d',strtotime(date('Y-m-t',strtotime($future_month_start))."+$date_set day -1 day"));
 	//12月～1月に跨ぐ処理
 	if($future_month_start > $future_month_end){
 		$future_month_end = date('Y-m-d',strtotime($future_month_end."+1 year"));
@@ -79,7 +79,7 @@
 	get_headerMenu();
 ?>
 	<div class="link_area">
-		<a class="prev" href="./mypage.php?year=<?php echo $prev_year?>">過去の<br class="sp">購入履歴</a>
+		<a class="prev" href="./mypage.php?year=<?php echo $prev_year?>&prev=1">過去の<br class="sp">購入履歴</a>
 <?php
 	if($_GET['year'] != ""){
 ?>
@@ -87,7 +87,7 @@
 <?php
 	}
 ?>
-		<a class="next" href="./mypage.php?year=<?php echo $next_year ?>"><?php if($_GET['year'] == ""){ echo date('n/j',strtotime($next_month_end)); }?>以降の<br class="sp">購入予定</a>
+		<a class="next" href="./mypage.php?year=<?php echo $next_year ?>&next=1"><?php if($_GET['year'] == ""){ echo date('n/j',strtotime($next_month_end)); }?>以降の<br class="sp">購入予定</a>
 	</div>
 	<form method="post" action="../../inc/do/update_items.php">
 <?php
@@ -96,12 +96,12 @@
 		$date_setting_end = $month_end." 23:59:59";
 		$disp_num = 2;
 		$disp_title = "<h2>【当月】".date('n/j',strtotime($month_start))."～".date('n/j',strtotime($month_end))."の購入品</h2>";
-	}elseif($_GET['year'] <= $this_year){
+	}elseif($_GET['year'] && $_GET['prev'] == 1){
 		$date_setting_start = $archive_month_start." 00:00:00";
 		$date_setting_end = $archive_month_end." 23:59:59";
 		$disp_num = 12;
 		$disp_title = "<h2>".date('Y/n/j',strtotime($archive_month_start))."～".date('Y/n/j',strtotime($archive_month_end))."の購入品</h2>";
-	}elseif($_GET['year'] > $this_year){
+	}elseif($_GET['year'] && $_GET['next'] == 1){
 		$date_setting_start = $future_month_start." 00:00:00";
 		$date_setting_end = $future_month_end." 23:59:59";
 		$disp_num = 12;
@@ -118,14 +118,14 @@
 	for($i=0;$i<$disp_num;$i++){
 
 		$price_total = 0; /* 金額リセット */
-		if(!empty($results) && $_GET['year'] < $this_year || $_GET['year'] >= $this_year){
+		if(!empty($results)){
 			foreach($results as $rec){
 				$price_total += $rec['item_price'];
 			}
 ?>
 			<section>
 			<?php echo $disp_title?>
-			<p class="total_price">総額：<span><?php echo number_format($price_total);?></span>円</p>
+			<p class="total_price">支出総額：<span><?php echo number_format($price_total);?></span>円</p>
 			<table>
 				<thead>
 					<tr>
@@ -218,18 +218,18 @@
 			$date_setting_start = $next_month_start." 00:00:00";
 			$date_setting_end = $next_month_end." 23:59:59";
 			$disp_title = "<h2>【翌月】".date('n/j',strtotime($next_month_start))."～".date('n/j',strtotime($next_month_end))."の購入品</h2>";
-		}elseif($_GET['year'] <= $this_year){
+		}elseif($_GET['year'] && $_GET['prev'] == 1){
 			$archive_month_start = date('Y-m-d',strtotime($archive_month_end."+1 day"));
-			$archive_month_end = date('Y-m-d',strtotime(date('Y-m-t',strtotime($archive_month_end))."+$date_set day -1 day"));
+			$archive_month_end = date('Y-m-d',strtotime(date('Y-m-t',strtotime($archive_month_start))."+$date_set day -1 day"));
 			if (strtotime($archive_month_start) >= strtotime($month_start)) {
 				break;
 			}
 			$date_setting_start = $archive_month_start." 00:00:00";
 			$date_setting_end = $archive_month_end." 23:59:59";
 			$disp_title = "<h2>".date('Y/n/j',strtotime($archive_month_start))."～".date('Y/n/j',strtotime($archive_month_end))."の購入品</h2>";
-		}elseif($_GET['year'] > $this_year){
+		}elseif($_GET['year'] && $_GET['next'] == 1){
 			$future_month_start = date('Y-m-d',strtotime($future_month_end."+1 day"));
-			$future_month_end = date('Y-m-d',strtotime(date('Y-m-t',strtotime($future_month_end))."+$date_set day -1 day"));	
+			$future_month_end = date('Y-m-d',strtotime(date('Y-m-t',strtotime($future_month_start))."+$date_set day -1 day"));	
 			$date_setting_start = $future_month_start." 00:00:00";
 			$date_setting_end = $future_month_end." 23:59:59";
 			$disp_title = "<h2>".date('Y/n/j',strtotime($future_month_start))."～".date('Y/n/j',strtotime($future_month_end))."の購入品</h2>";
