@@ -24,6 +24,13 @@ header ul li{
 .item_main section .total_price::after{
 	font-size: 20px;
 }
+.item_main section .price_detail{
+	font-size: 16px;
+	margin-right: 25px;
+}
+.item_main section .price_detail span{
+	font-size: 20px;
+}
 .item_main section table .pc{
 	display: table-row;
 }
@@ -84,7 +91,8 @@ header ul li{
 .item_edit table select.season_select{
 	width: 45%;
 }
-.item_edit table select.todo_select{
+.item_edit table select.todo_select,
+.item_edit table select#payment_select{
 	width: 50%;
 }
 

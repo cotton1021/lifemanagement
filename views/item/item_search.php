@@ -12,7 +12,8 @@
 					CG.com_genre,
 					IP.item_priority_name,
 					IPC.item_pc,
-					IRS.item_rs
+					IRS.item_rs,
+					IPS.item_ps_name
 					FROM item_main AS IM
 						LEFT JOIN common_cat AS CC
 							ON IM.item_cat = CC.com_cat_id
@@ -24,6 +25,8 @@
 							ON IM.item_price_confirm = IPC.item_pc_id
 						LEFT JOIN item_release_season AS IRS
 							ON IM.item_release_season = IRS.item_rs_id
+						LEFT JOIN item_payment_separate AS IPS
+							ON IM.item_payment_separate = IPS.item_ps_id
 						WHERE 1=1";
 
 	// 検索ボタンが押された場合のみにSQLを実行
@@ -87,6 +90,12 @@
 							<option value="">済</option>
 						</select>
 					</td>
+					<th>決済手段</th>
+					<td>
+						<select name="" id="">
+							<option value=""></option>
+						</select>
+					</td>
 					<th>優先度</th>
 					<td>
 						<select name="" id="">
@@ -112,6 +121,10 @@
 						<input type="checkbox" name="" id=""><label for="">保留</label>
 						<input type="checkbox" name="" id=""><label for="">削除</label>
 					</td>
+					<th></th>
+					<td></td>
+					<th></th>
+					<td></td>
 				</tr>
 			</table>
 			<div class="button_area">
@@ -147,6 +160,7 @@
 						<th>タイトル</th>
 						<th>カテゴリ</th>
 						<th>ジャンル</th>
+						<th>決済手段</th>
 						<th>金額</th>
 						<th>優先度</th>
 						<th>発売日</th>
@@ -238,6 +252,7 @@
 		}
 ?>
 						</td>
+						<td data-label="決済手段"><span class="item_ps"><?php echo $rec['item_ps_name']?></span></td>
 						<td data-label="金額：" class="price"><?php echo number_format($rec['item_price']);?>円<?php if($item_price_confirm > 0){?><span class="notice">（<?php echo $rec['item_pc']?>）</span><?php } ?></td>
 						<td data-label="優先度："><span class="priority <?php echo $item_priority?>"><?php echo $rec['item_priority_name']?></span></td>
 						<td data-label="発売日：" class="release"><?php echo $item_release_date?><?php if($item_release_season != 0){?><span class="notice">（<?php echo $rec['item_rs']?>）</span><?php } ?></td>

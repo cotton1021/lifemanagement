@@ -124,6 +124,14 @@ $todo_place_stmt = $dbh -> prepare($sql);
 $todo_place_stmt->execute();
 $todo_place = $todo_place_stmt->fetchAll(PDO::FETCH_ASSOC);
 
+/* payment_separate */
+$sql = "SELECT IPS.*
+				FROM item_payment_separate AS IPS
+				WHERE 1";
+$payment_separate_stmt = $dbh -> prepare($sql);
+$payment_separate_stmt->execute();
+$payment_separate = $payment_separate_stmt->fetchAll(PDO::FETCH_ASSOC);
+
 $dbh = null;
 
 ?>
@@ -236,6 +244,20 @@ if($item_num > 0){
 <?php
 	}
 ?>
+					</td>
+				</tr>
+				<tr>
+					<th>決済手段</th>
+					<td>
+						<select name="items[<?= $index ?>][item_payment_separate]" id="payment_select">
+<?php
+	foreach($payment_separate as $rec_ps){
+?>
+							<option value="<?php echo $rec_ps['item_ps_id']?>" <?php if( $rec_ps['item_ps_id'] == $item['item_payment_separate']){?>selected<?php } ?>><?php echo $rec_ps['item_ps_name']?></option>
+<?php
+	}
+?>
+						</select>
 					</td>
 				</tr>
 				<tr>

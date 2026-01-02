@@ -308,7 +308,8 @@ header ul li.room_link:hover a {
 	text-align: center;
 }
 
-.item_main section .total_price {
+.item_main section .total_price,
+.item_main section .price_detail {
 	text-align: right;
 }
 
@@ -321,8 +322,11 @@ header ul li.room_link:hover a {
 	content: "▲";
 }
 
-.item_main section table {
+.item_main section div {
 	display: none;
+}
+
+.item_main section table {
 	width: 100%;
 	border-collapse: collapse;
 	border-bottom: 1px solid #ccc;
@@ -383,6 +387,10 @@ header ul li.room_link:hover a {
 
 .item_main section table tr td span.item_genre {
 	background-color: coral;
+}
+
+.item_main section table tr td span.item_ps {
+	background-color: #666;
 }
 
 .item_main section table tr td span.notice {
@@ -714,6 +722,10 @@ header ul li.room_link:hover a {
 
 .item_list .list_area table tr td span.item_genre {
 	background-color: coral;
+}
+
+.item_list .list_area table tr td span.item_ps {
+	background-color: #666;
 }
 
 .item_list .list_area table tr td span.notice {

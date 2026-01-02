@@ -123,7 +123,7 @@ $selected_payment_date = $payDateRec['item_separate_date'];
 						<td class="item_ps_payment">
 							<select name="item_ps_payment[<?php echo $rec['item_ps_id'] ?>]" id="item_ps_payment">
 <?php
-		for($i=1; $i<=28; $i++){
+		for($i=0; $i<=28; $i++){
 			$selected = ($i == $selected_ps_payment_date) ? 'selected' : '';
 ?>
 							<option value="<?php echo $i?>"<?php echo $selected ?>><?php echo $i?></option>

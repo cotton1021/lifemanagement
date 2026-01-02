@@ -46,13 +46,22 @@ header ul li{
 .item_main section h2{
 	font-size: 1.3rem;
 }
-.item_main section .total_price{
+.item_main section .total_price {
 	margin-right: 5px;
+}
+.item_main section .price_detail {
+	margin-right: 30px;
 }
 .item_main section .total_price span{
 	font-size: 20px;
 }
 .item_main section .total_price::after{
+	font-size: 16px;
+}
+.item_main section .price_detail{
+	font-size: 14px;
+}
+.item_main section .price_detail span{
 	font-size: 16px;
 }
 .item_main section table .pc{
