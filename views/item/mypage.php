@@ -189,7 +189,7 @@ $stmt = $dbh->prepare($sql);
 				$payment_term = getPreviousPeriod($payment_date, $start_day);
 				$payment_start = $payment_term['start'];
 				$payment_end = $payment_term['end'];
-				if($pay_day == 0){
+				if ($pay_day == 0) {
 					$payment_start = $withdraw_start;
 					$payment_end = $withdraw_end;
 				}
@@ -212,114 +212,114 @@ $stmt = $dbh->prepare($sql);
 				$price_total += $total;
 			}
 		?>
-			<?php if ( ($_GET['prev'] != "" && count($results) > 0) || $_GET['prev'] == "" ): ?>
-			<section>
-				<?php echo $disp_title ?>
-				<p class="total_price">支出総額：<span><?php echo number_format($price_total); ?></span>円</p>
-				<div>
-					<?php
-					foreach ($payment_totals as $name => $total):
-						if ($total > 0) {
-					?>
-							<p class="price_detail">
-								<?php echo htmlspecialchars($name, ENT_QUOTES, 'UTF-8'); ?>：
-								<span><?php echo number_format($total); ?></span>円
-							</p>
-					<?php
-						}
-					endforeach;
-					?>
-					<table>
-						<thead>
-							<tr>
-								<th> </th>
-								<th>タイトル</th>
-								<th>金額</th>
-								<th>発売日</th>
-								<th>購入日</th>
-								<th>決済日</th>
-								<th> </th>
-							</tr>
-						</thead>
+			<?php if (($_GET['prev'] != "" && count($results) > 0) || $_GET['prev'] == ""): ?>
+				<section>
+					<?php echo $disp_title ?>
+					<p class="total_price">支出総額：<span><?php echo number_format($price_total); ?></span>円</p>
+					<div>
 						<?php
-						foreach ($results as $rec) {
-							$item_priority_id = $rec['item_priority'];
-							$item_priority = "";
-							if ($item_priority_id == 1) {
-								$item_priority = "high";
-							} elseif ($item_priority_id == 2) {
-								$item_priority = "middle";
-							} elseif ($item_priority_id == 3) {
-								$item_priority = "low";
-							}
-							$item_release_date = $rec['item_release_date'];
-							$item_release_date = (new DateTime($item_release_date))->format("Y/n/j");
-							$item_buy_date = $rec['item_buy_date'];
-							$item_buy_date = (new DateTime($item_buy_date))->format("Y/n/j");
-							$item_payment_date = $rec['item_payment_date'];
-							$item_payment_date = (new DateTime($item_payment_date))->format("Y/n/j");
-							$item_price_confirm = $rec['item_price_confirm'];
-							$item_pay_confirm = $rec['item_pay_confirm'];
-							$item_release_season = $rec['item_release_season'];
+						foreach ($payment_totals as $name => $total):
+							if ($total > 0) {
 						?>
-							<tbody>
+								<p class="price_detail">
+									<?php echo htmlspecialchars($name, ENT_QUOTES, 'UTF-8'); ?>：
+									<span><?php echo number_format($total); ?></span>円
+								</p>
+						<?php
+							}
+						endforeach;
+						?>
+						<table>
+							<thead>
 								<tr>
-									<td rowspan="2" class="check">
-										<input type="checkbox" name="item_select[]" value="<?php echo $rec['item_id'] ?>">
-										<input type="hidden" name="action" id="actionField" value="">
-									</td>
-									<td data-label="タイトル：" class="title">
-										<?php
-										if (!empty($rec['item_url'])) {
-										?>
-											<a href="<?php echo $rec['item_url'] ?>" target="_blank"><?php echo $rec['item_name'] ?></a>
-										<?php
-										} else {
-										?>
-											<?php echo $rec['item_name'] ?>
-										<?php
-										}
-										?>
-										<span class="priority <?php echo $item_priority ?>"><?php echo $rec['item_priority_name'] ?></span><br>
-										<?php
-										if (!empty($rec['item_cat'])) {
-										?>
-											<span class="item_cat"><?php echo $rec['com_cat'] ?></span>
-										<?php
-										}
-										if (!empty($rec['item_genre'])) {
-										?>
-											<span class="item_genre"><?php echo $rec['com_genre'] ?></span>
-										<?php
-										}
-										?>
-										<span class="item_ps"><?php echo $rec['item_ps_name'] ?></span>
-										<br class="sp">
-										<p class="note sp"><?php echo $rec['item_note'] ?></p>
-									</td>
-									<td data-label="金額：" class="price"><?php echo number_format($rec['item_price']); ?>円<?php if ($item_price_confirm > 0) { ?><span class="notice">（<?php echo $rec['item_pc'] ?>）</span><?php } ?></td>
-									<td data-label="発売日：" class="release"><?php echo $item_release_date ?><?php if ($item_release_season != 0) { ?><span class="notice">（<?php echo $rec['item_rs'] ?>）</span><?php } ?></td>
-									<td data-label="購入日：" class="buy_date"><?php echo $item_buy_date ?></td>
-									<td data-label="決済日：" class="payment
+									<th> </th>
+									<th>タイトル</th>
+									<th>金額</th>
+									<th>発売日</th>
+									<th>購入日</th>
+									<th>決済日</th>
+									<th> </th>
+								</tr>
+							</thead>
+							<?php
+							foreach ($results as $rec) {
+								$item_priority_id = $rec['item_priority'];
+								$item_priority = "";
+								if ($item_priority_id == 1) {
+									$item_priority = "high";
+								} elseif ($item_priority_id == 2) {
+									$item_priority = "middle";
+								} elseif ($item_priority_id == 3) {
+									$item_priority = "low";
+								}
+								$item_release_date = $rec['item_release_date'];
+								$item_release_date = (new DateTime($item_release_date))->format("Y/n/j");
+								$item_buy_date = $rec['item_buy_date'];
+								$item_buy_date = (new DateTime($item_buy_date))->format("Y/n/j");
+								$item_payment_date = $rec['item_payment_date'];
+								$item_payment_date = (new DateTime($item_payment_date))->format("Y/n/j");
+								$item_price_confirm = $rec['item_price_confirm'];
+								$item_pay_confirm = $rec['item_pay_confirm'];
+								$item_release_season = $rec['item_release_season'];
+							?>
+								<tbody>
+									<tr>
+										<td rowspan="2" class="check">
+											<input type="checkbox" name="item_select[]" value="<?php echo $rec['item_id'] ?>">
+											<input type="hidden" name="action" id="actionField" value="">
+										</td>
+										<td data-label="タイトル：" class="title">
+											<?php
+											if (!empty($rec['item_url'])) {
+											?>
+												<a href="<?php echo $rec['item_url'] ?>" target="_blank"><?php echo $rec['item_name'] ?></a>
+											<?php
+											} else {
+											?>
+												<?php echo $rec['item_name'] ?>
+											<?php
+											}
+											?>
+											<span class="priority <?php echo $item_priority ?>"><?php echo $rec['item_priority_name'] ?></span><br>
+											<?php
+											if (!empty($rec['item_cat'])) {
+											?>
+												<span class="item_cat"><?php echo $rec['com_cat'] ?></span>
+											<?php
+											}
+											if (!empty($rec['item_genre'])) {
+											?>
+												<span class="item_genre"><?php echo $rec['com_genre'] ?></span>
+											<?php
+											}
+											?>
+											<span class="item_ps"><?php echo $rec['item_ps_name'] ?></span>
+											<br class="sp">
+											<p class="note sp"><?php echo $rec['item_note'] ?></p>
+										</td>
+										<td data-label="金額：" class="price"><?php echo number_format($rec['item_price']); ?>円<?php if ($item_price_confirm > 0) { ?><span class="notice">（<?php echo $rec['item_pc'] ?>）</span><?php } ?></td>
+										<td data-label="発売日：" class="release"><?php echo $item_release_date ?><?php if ($item_release_season != 0) { ?><span class="notice">（<?php echo $rec['item_rs'] ?>）</span><?php } ?></td>
+										<td data-label="購入日：" class="buy_date"><?php echo $item_buy_date ?></td>
+										<td data-label="決済日：" class="payment
 									<?php if ($item_pay_confirm == 0) {
 										echo ' not_confirm';
 									} ?>"><?php echo $item_payment_date ?></td>
-									<td rowspan="2" class="change">
-										<a class="change_button" href="./item_edit.php?id=<?php echo $rec['item_id'] ?>" target="_blank">変更</a>
-									</td>
-								</tr>
-								<tr class="pc">
-									<td colspan="5">
-										<p class="note"><?php echo $rec['item_note'] ?></p>
-									</td>
-								</tr>
-							</tbody>
-						<?php
-						}
-						?>
-					</table>
-				</div>
-			</section>
+										<td rowspan="2" class="change">
+											<a class="change_button" href="./item_edit.php?id=<?php echo $rec['item_id'] ?>" target="_blank">変更</a>
+										</td>
+									</tr>
+									<tr class="pc">
+										<td colspan="5">
+											<p class="note"><?php echo $rec['item_note'] ?></p>
+										</td>
+									</tr>
+								</tbody>
+							<?php
+							}
+							?>
+						</table>
+					</div>
+				</section>
 			<?php endif; ?>
 		<?php
 			if ($_GET['year'] == '') {
